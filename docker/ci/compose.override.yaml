@@ -1,0 +1,19 @@
+services:
+  app:
+    build:
+      context: .
+      target: ci
+    environment:
+      APP_ENV: "test"
+      SHELL_VERBOSITY: -1
+      SYMFONY_PHPUNIT_REMOVE: ""
+      SYMFONY_PHPUNIT_VERSION: "10.5"
+      KERNEL_CLASS: "\\App\\Common\\Infrastructure\\Symfony\\Kernel"
+      SYMFONY_DEPRECATIONS_HELPER: "disabled"
+  database:
+    ports: ["3306"]
+  mailhog:
+    image: richarvey/mailhog:latest
+    restart: always
+    ports:
+      - "1025"

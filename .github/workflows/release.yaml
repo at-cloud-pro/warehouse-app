@@ -1,0 +1,23 @@
+name: "release"
+on:
+  push:
+    branches: [ "main" ]
+    paths: [ "**", "!**.md" ]
+env:
+  PACKAGE_NAME: "ghcr.io/at-cloud-pro/warehouse-app"
+jobs:
+  release:
+    runs-on: "ubuntu-22.04"
+    timeout-minutes: 5
+    steps:
+      # checkout repository
+      - { name: "Login to ghcr.io", uses: "docker/login-action@v3", with: { registry: "ghcr.io", username: "${{github.actor}}", password: "${{secrets.GITHUB_TOKEN}}" } }
+      - { name: "Clone git repository", uses: "actions/checkout@v4" }
+
+      # build containers
+      - { name: "Build app Docker image", run: "docker build -t ${{ env.PACKAGE_NAME }}:$(jq -r '.version' composer.json) ." }
+
+      # publish tag and image
+      - { name: "Release tag", run: "git tag $(jq -r '.version' composer.json)" }
+      - { name: "Publish tag", run: "git push --tags" }
+      - { name: "Publish docker image", run: "docker push ${{ env.PACKAGE_NAME}}:$(jq -r '.version' composer.json)" }

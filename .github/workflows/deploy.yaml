@@ -1,0 +1,15 @@
+#name: "deploy"
+#
+#on:
+#  release:
+#    types: [ published ]
+#jobs:
+##  deploy:
+##    runs-on: "ubuntu-22.04"
+##    timeout-minutes: 5
+##    steps:
+##      - name: "Build and deploy on production"
+##        uses: "digitalocean/app_action@v1.1.5"
+##        with:
+##          app_name: "at-cloud-account-manager"
+##          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}

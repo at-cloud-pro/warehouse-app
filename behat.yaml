@@ -1,0 +1,21 @@
+default:
+  suites:
+    api:
+      paths:
+        - features/api
+      contexts:
+        - App\Tests\Behat\Context\RestContext: ~
+    gui:
+      paths:
+        - features/gui
+      contexts:
+        - App\Tests\Behat\Context\BrowserContext: ~
+        - App\Tests\Behat\Context\DatabaseContext: ~
+
+  extensions:
+    FriendsOfBehat\SymfonyExtension:
+      bootstrap: tests/bootstrap.php
+      kernel:
+        path: src/Common/Infrastructure/Symfony/Kernel.php
+        class: App\Common\Infrastructure\Symfony\Kernel
+    DAMA\DoctrineTestBundle\Behat\ServiceContainer\DoctrineExtension: ~
