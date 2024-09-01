@@ -1,6 +1,6 @@
 FROM ghcr.io/at-cloud-pro/caddy-php:4.0.0 AS app
 
-ENV APP_VERSION="0.1.1"
+ENV APP_VERSION="0.2.0"
 
 RUN apk update \
 && apk add --no-cache msmtp libpng-dev \
