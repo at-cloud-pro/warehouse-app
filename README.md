@@ -1,5 +1,5 @@
 # Warehouse
-Portal providing documents preview and files sharing in AT Cloud Platform
+Portal providing documents preview and files sharing in AT Cloud Platform.
 
 ## Before you start
 
