@@ -1,4 +1,7 @@
 {
+    "version": "0.1.0",
+    "name": "at-cloud-pro/warehouse-app",
+    "description": "Portal providing documents preview and files sharing in AT Cloud Platform",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
