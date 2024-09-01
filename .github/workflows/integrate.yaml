@@ -1,0 +1,37 @@
+name: "integrate"
+on:
+  pull_request:
+    paths: [ "**", "!**.md" ]
+jobs:
+  version:
+    runs-on: "ubuntu-22.04"
+    timeout-minutes: 1
+    steps:
+      # checkout repository
+      - { name: "Login to ghcr.io", uses: "docker/login-action@v3", with: { registry: "ghcr.io", username: "${{github.actor}}", password: "${{secrets.GITHUB_TOKEN}}" } }
+      - { name: "Clone git repository", uses: "actions/checkout@v4", with: { fetch-depth: 0 } }
+      - { name: "Check if package version is not yet released", run: "./docker/ci/scripts/check-is-tag-free $(jq -r '.version' composer.json)" }
+  integrate:
+    runs-on: "ubuntu-22.04"
+    timeout-minutes: 5
+    steps:
+      # checkout repository
+      - { name: "Login to ghcr.io", uses: "docker/login-action@v3", with: { registry: "ghcr.io", username: "${{github.actor}}", password: "${{secrets.GITHUB_TOKEN}}" } }
+      - { name: "Clone git repository", uses: "actions/checkout@v4" }
+
+      # build containers using minimal configuration
+      - { name: "Load CI configuration", run: "ln -s ./docker/ci/compose.override.yaml ." }
+      - { name: "Build and run app with backing services", run: "docker compose up --detach --build" }
+
+      # linting, code style, static analysis
+      - { name: "Run composer packages audit", run: "docker compose exec -T app composer audit" }
+      - { name: "Lint Symfony service container", run: "docker compose exec -T app bin/console lint:container" }
+      - { name: "Lint YAML config files", run: "docker compose exec -T app bin/console lint:yaml config" }
+      - { name: "Lint Doctrine schema", run: "docker compose exec -T app bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction" }
+      - { name: "Lint PHP source code", run: "docker compose exec -T app vendor/bin/php-cs-fixer fix --dry-run --using-cache no --allow-risky=yes" }
+      - { name: "Run code static analysis", run: "docker compose exec -T app vendor/bin/phpstan analyse" }
+
+      # tests
+      - { name: "Unit tests", run: "docker compose exec -T app vendor/bin/phpunit --do-not-cache-result --testsuite unit" }
+#      - { name: "UI functional tests", run: "docker compose exec -T app vendor/bin/behat --format progress --suite gui" }
+#      - { name: "API functional tests", run: "docker compose exec -T app vendor/bin/behat --format progress --suite api" }
