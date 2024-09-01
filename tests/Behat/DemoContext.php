@@ -31,7 +31,7 @@ final class DemoContext implements Context
     #[Then('the response should be received')]
     public function theResponseShouldBeReceived(): void
     {
-        if ($this->response === null) {
+        if (null === $this->response) {
             throw new \RuntimeException('No response received');
         }
     }
