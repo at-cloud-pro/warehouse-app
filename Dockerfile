@@ -1,6 +1,6 @@
 FROM ghcr.io/at-cloud-pro/caddy-php:4.0.0 AS app
 
-ENV APP_VERSION="0.1.0"
+ENV APP_VERSION="0.1.1"
 
 RUN apk update \
 && apk add --no-cache msmtp libpng-dev \
@@ -33,5 +33,5 @@ ENTRYPOINT ["./docker/ci/entrypoint"]
 FROM app AS production
 
 ENV APP_ENV="prod"
-RUN composer install --no-dev --no-interaction
+RUN composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction
 ENTRYPOINT ["./docker/prod/entrypoint"]
