@@ -2,6 +2,6 @@ Feature:
     As a user
     I can see the dashboard
 
-    Scenario: It receives a response from Symfony's kernel
-        When a demo scenario sends a request to "/"
-        Then the response should be received
+    Scenario: Any user can access the dashboard
+        When I go to "/"
+        Then I expect response status code to be 200
