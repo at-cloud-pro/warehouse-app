@@ -16,7 +16,7 @@ return [
     DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
     DoctrineMigrationsBundle::class => ['all' => true],
     DAMADoctrineTestBundle::class => ['test' => true],
-    FriendsOfBehatSymfonyExtensionBundle::class => ['test' => true],
+    FriendsOfBehatSymfonyExtensionBundle::class => ['dev' => true, 'test' => true],
     TwigBundle::class => ['all' => true],
     WebProfilerBundle::class => ['dev' => true, 'test' => true],
 ];

@@ -1,5 +1,5 @@
-controllers:
+dashboard:
   resource:
-    path: ../src/Controller/
-    namespace: App\Controller
+    path: ../src/Dashboard/UI/Action/
+    namespace: App\Dashboard\UI\Action
   type: attribute
