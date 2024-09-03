@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Behat\Context;
 
-use App\AccountManager\Infrastructure\Doctrine\Entity\User\User;
 use App\AccountManager\Infrastructure\Doctrine\Repository\UserRepository;
 use App\Common\Infrastructure\Symfony\Security\Firewall;
 use App\Tests\Behat\Helper\HttpMethod;
@@ -24,13 +23,13 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 final class BrowserContext implements Context
 {
     private readonly KernelBrowser $browser;
-    //    private readonly UserRepository $userRepository;
+    //    private readonly LocalUserRepository $userRepository;
 
     private ?Response $response = null;
     private ?Crawler $crawler = null;
-    //    private ?User $currentUser = null;
+    //    private ?LocalUser $currentUser = null;
 
-    public function __construct(KernelBrowser $browser/* , UserRepository $userRepository */)
+    public function __construct(KernelBrowser $browser/* , LocalUserRepository $userRepository */)
     {
         $this->browser = $browser;
         //        $this->userRepository = $userRepository;
@@ -40,7 +39,7 @@ final class BrowserContext implements Context
     public function iAmSignedInAs(string $email): void
     {
         //        $user = $this->userRepository->findOneBy(['email' => $email]);
-        //        Assert::assertInstanceOf(User::class, $user, 'User with this email was not found.');
+        //        Assert::assertInstanceOf(LocalUser::class, $user, 'LocalUser with this email was not found.');
 
         //        $this->browser->loginUser($user, Firewall::NAME_GUI);
         //        $this->currentUser = $user;

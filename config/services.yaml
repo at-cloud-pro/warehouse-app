@@ -1,4 +1,6 @@
 parameters:
+  account_manager.host: '%env(AT_CLOUD_ACCOUNT_MANAGER_HOST)%'
+  account_manager.service: '%env(AT_CLOUD_ACCOUNT_MANAGER_SERVICE)%'
 
 services:
   _defaults:
@@ -11,3 +13,8 @@ services:
       - '../src/DependencyInjection/'
       - '../src/Entity/'
       - '../src/Kernel.php'
+
+  App\Auth\Infrastructure\AccountManager\Provider\AccountManagerUrlProvider:
+    arguments:
+      - '%account_manager.host%'
+      - '%account_manager.service%'

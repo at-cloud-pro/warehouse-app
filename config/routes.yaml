@@ -1,3 +1,10 @@
+auth:
+  resource:
+    path: ../src/Auth/UI/Action/
+    namespace: App\Auth\UI\Action
+  type: attribute
+
+
 dashboard:
   resource:
     path: ../src/Dashboard/UI/Action/

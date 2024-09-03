@@ -22,14 +22,14 @@ final class RestContext implements Context
     use JsonTraverseTrait;
 
     private readonly KernelBrowser $browser;
-    //    private readonly UserRepository $userRepository;
+    //    private readonly LocalUserRepository $userRepository;
 
     private ?Response $response = null;
 
     /** @var array<string, string> */
     private array $headers = [];
 
-    public function __construct(KernelBrowser $browser /* UserRepository $userRepository */)
+    public function __construct(KernelBrowser $browser /* LocalUserRepository $userRepository */)
     {
         $this->browser = $browser;
         //        $this->userRepository = $userRepository;

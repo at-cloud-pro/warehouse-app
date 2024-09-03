@@ -1,0 +1,9 @@
+framework:
+  messenger:
+    buses:
+      messenger.bus.command:
+        middleware:
+          - doctrine_transaction
+    transports:
+      sync: 'sync://'
+    routing: ~
