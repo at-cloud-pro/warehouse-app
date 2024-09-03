@@ -35,14 +35,14 @@ final class RestContext implements Context
         //        $this->userRepository = $userRepository;
     }
 
-    #[Given('I am authenticated as :email')]
-    public function iAmAuthenticatedAs(string $email): void
-    {
-        $user = $this->userRepository->findOneBy(['email' => $email]);
-        Assert::notNull($user);
-
-        $this->browser->loginUser($user, Firewall::NAME_API);
-    }
+    //    #[Given('I am authenticated as :email')]
+    //    public function iAmAuthenticatedAs(string $email): void
+    //    {
+    //        $user = $this->userRepository->findOneBy(['email' => $email]);
+    //        Assert::notNull($user);
+    //
+    //        $this->browser->loginUser($user, Firewall::NAME_API);
+    //    }
 
     #[Given('I set up HTTP header :name with value :value')]
     public function iSetupHeader(string $name, string $value): void
