@@ -1,0 +1,18 @@
+{% extends 'pages/fullscreen.template.html.twig' %}
+{% trans_default_domain 'dashboard' %}
+
+{% block title %}{{ 'dashboard.main.page_title'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="m-3">
+        <nav class="navbar bg-body rounded shadow-sm mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="{{ asset('image/at_cloud_logo.svg') }}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                    <span class="text-secondary">Warehouse</span>
+                </a>
+            </div>
+        </nav>
+        <h1>hello, world</h1>
+    </div>
+{% endblock %}

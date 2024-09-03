@@ -39,6 +39,7 @@ This project use:
 - PHP 8.3
 - Symfony framework
 - Doctrine ORM
+- Twig with Bootstrap 5.3
 
 as a leading software and **DigitalOcean** as a cloud provider. Locally, the environment is set up using Docker Compose.
 
