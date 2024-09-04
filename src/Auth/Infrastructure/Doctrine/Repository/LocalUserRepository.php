@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Auth\Infrastructure\Doctrine\Repository;
 
-use App\Auth\Infrastructure\AccountManager\AccountManagerUser;
+use App\Auth\Domain\AccountIdentifier;
 use App\Auth\Infrastructure\Doctrine\Entity\LocalUser;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -24,6 +24,12 @@ class LocalUserRepository extends ServiceEntityRepository
         parent::__construct($registry, LocalUser::class);
     }
 
+    public function store(LocalUser $entity): void
+    {
+        $this->getEntityManager()->persist($entity);
+        $this->getEntityManager()->flush();
+    }
+
     public function remove(LocalUser $entity, bool $flush = true): void
     {
         $this->getEntityManager()->remove($entity);
@@ -33,15 +39,7 @@ class LocalUserRepository extends ServiceEntityRepository
         }
     }
 
-    public function addUserByAccountManagerUser(AccountManagerUser $identifier): void
-    {
-        $user = new LocalUser($identifier->type, $identifier->value);
-
-        $this->getEntityManager()->persist($user);
-        $this->getEntityManager()->flush();
-    }
-
-    public function findByAccountManagerUser(AccountManagerUser $identifier): ?LocalUser
+    public function findByIdentifier(AccountIdentifier $identifier): ?LocalUser
     {
         return $this->findOneBy(['identifierType' => $identifier->type, 'identifierValue' => $identifier->value]);
     }

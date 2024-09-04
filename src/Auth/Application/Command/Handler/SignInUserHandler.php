@@ -5,33 +5,25 @@ declare(strict_types=1);
 namespace App\Auth\Application\Command\Handler;
 
 use App\Auth\Application\Command\SignInUserCommand;
-use App\Auth\Domain\AuthenticatedUser;
 use App\Auth\Infrastructure\Doctrine\Entity\LocalUser;
 use App\Auth\Infrastructure\Doctrine\Repository\LocalUserRepository;
-use App\Auth\Infrastructure\JsonWebToken\JwtDecoderFacade;
+use App\Auth\Infrastructure\Symfony\Security\AuthenticatedUser;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
 final readonly class SignInUserHandler
 {
-    public function __construct(
-        private JwtDecoderFacade $jwtDecoderFacade,
-        private LocalUserRepository $localUserRepository,
-        private Security $security
-    ) {}
+    public function __construct(private LocalUserRepository $localUserRepository, private Security $security) {}
 
     public function __invoke(SignInUserCommand $command): void
     {
-        $identifier = $this->jwtDecoderFacade->getIdentifierFromToken($command->token);
-
-        $localUser = $this->localUserRepository->findByAccountManagerUser($identifier);
+        $userFromToken = $command->token->getUser();
+        $localUser = $this->localUserRepository->findByIdentifier($userFromToken->identifier);
 
         if (null === $localUser) {
-            $this->localUserRepository->addUserByAccountManagerUser($identifier);
-
-            /** @var LocalUser $localUser */
-            $localUser = $this->localUserRepository->findByAccountManagerUser($identifier);
+            $localUser = new LocalUser($userFromToken->identifier, $userFromToken->jwt);
+            $this->localUserRepository->store($localUser);
         }
 
         $account = AuthenticatedUser::createFromLocalUser($localUser);

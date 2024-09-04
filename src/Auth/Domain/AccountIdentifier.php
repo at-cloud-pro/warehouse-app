@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Infrastructure\AccountManager;
+namespace App\Auth\Domain;
 
-final readonly class AccountManagerUser
+final readonly class AccountIdentifier
 {
     public function __construct(public string $type, public string $value) {}
 }

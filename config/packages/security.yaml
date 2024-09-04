@@ -1,7 +1,7 @@
 security:
   providers:
     account_manager:
-      id: App\Auth\Infrastructure\AccountManager\Provider\AccountManagerUserProvider
+      id: App\Auth\Infrastructure\Symfony\Security\AccountManagerUserProvider
   firewalls:
     dev:
       pattern: ^/(_(profiler|wdt)|css|images|js)/

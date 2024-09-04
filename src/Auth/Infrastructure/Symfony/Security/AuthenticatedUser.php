@@ -2,28 +2,35 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Domain;
+namespace App\Auth\Infrastructure\Symfony\Security;
 
+use App\Auth\Domain\AccountRoles;
+use App\Auth\Domain\Jwt;
 use App\Auth\Infrastructure\Doctrine\Entity\LocalUser;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Uid\Uuid;
 
 final readonly class AuthenticatedUser implements UserInterface
 {
-    public function __construct(private Uuid $id, private string $identifierType, private string $identifierValue) {}
+    public function __construct(
+        private Uuid $id,
+        private string $identifierType,
+        private string $identifierValue,
+        private Jwt $jwt,
+        private AccountRoles $roles = new AccountRoles(),
+        private ?string $name = null,
+    ) {}
 
     public static function createFromLocalUser(LocalUser $localUser): self
     {
         return new self(
             $localUser->getId(),
             $localUser->getIdentifierType(),
-            $localUser->getIdentifierValue()
+            $localUser->getIdentifierValue(),
+            $localUser->getJwt(),
+            $localUser->getRoles(),
+            $localUser->getName(),
         );
-    }
-
-    public function getRoles(): array
-    {
-        return ['ROLE_USER'];
     }
 
     public function eraseCredentials(): void {}
@@ -46,5 +53,20 @@ final readonly class AuthenticatedUser implements UserInterface
     public function getIdentifierValue(): string
     {
         return $this->identifierValue;
+    }
+
+    public function getJwt(): Jwt
+    {
+        return $this->jwt;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function getRoles(): array
+    {
+        return array_merge($this->roles->toArray(), ['ROLE_USER']);
     }
 }

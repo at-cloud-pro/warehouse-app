@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Auth\UI\Action\Gui;
 
 use App\Auth\Application\Command\SignInUserCommand;
+use App\Auth\Domain\Jwt;
 use App\Common\UI\Action\AbstractCommandBusAwareAction;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +25,8 @@ final class CatchSsoTokenAction extends AbstractCommandBusAwareAction
             return $this->redirectToRoute('app.auth.redirect-to-iam');
         }
 
-        $command = new SignInUserCommand($token);
+        $jwt = new Jwt($token);
+        $command = new SignInUserCommand($jwt);
 
         $this->do($command);
 
