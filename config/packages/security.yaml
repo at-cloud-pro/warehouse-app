@@ -15,7 +15,7 @@ security:
         path: app.auth.sign-out
         target: app.auth.signed-out
   access_control:
-    - { path: ^/auth/redirect, roles: PUBLIC_ACCESS }
-    - { path: ^/auth/catch, roles: PUBLIC_ACCESS }
-    - { path: ^/auth/signed-out, roles: PUBLIC_ACCESS }
+    - { path: ^/(%app.supported_locale%)/auth/redirect, roles: PUBLIC_ACCESS }
+    - { path: ^/(%app.supported_locale%)/auth/catch, roles: PUBLIC_ACCESS }
+    - { path: ^/(%app.supported_locale%)/auth/signed-out, roles: PUBLIC_ACCESS }
     - { path: ^/, roles: ROLE_USER }

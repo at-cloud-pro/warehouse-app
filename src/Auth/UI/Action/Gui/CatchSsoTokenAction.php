@@ -12,7 +12,10 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class CatchSsoTokenAction extends AbstractCommandBusAwareAction
 {
-    #[Route(path: '/auth/catch')]
+    #[Route(
+        path: '/{_locale}/auth/catch',
+        requirements: ['_locale' => '%app.supported_locale%']
+    )]
     public function __invoke(Request $request): Response
     {
         $token = $request->query->get('token');

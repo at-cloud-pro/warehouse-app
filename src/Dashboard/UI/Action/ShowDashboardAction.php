@@ -8,7 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/', name: 'app.dashboard')]
+#[Route(
+    path: '/{_locale}',
+    name: 'app.dashboard',
+    requirements: ['_locale' => '%app.supported_locale%']
+)]
 final class ShowDashboardAction extends AbstractController
 {
     public function __invoke(): Response

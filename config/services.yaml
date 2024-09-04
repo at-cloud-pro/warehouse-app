@@ -1,6 +1,7 @@
 parameters:
   account_manager.host: '%env(AT_CLOUD_ACCOUNT_MANAGER_HOST)%'
   account_manager.service: '%env(AT_CLOUD_ACCOUNT_MANAGER_SERVICE)%'
+  app.supported_locale: 'en|pl'
 
 services:
   _defaults:

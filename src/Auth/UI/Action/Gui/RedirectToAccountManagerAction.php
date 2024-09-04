@@ -13,7 +13,11 @@ final class RedirectToAccountManagerAction extends AbstractController
 {
     public function __construct(private readonly AccountManagerUrlProviderInterface $accountManagerUrlProvider) {}
 
-    #[Route(path: '/auth/redirect', name: 'app.auth.redirect-to-iam')]
+    #[Route(
+        path: '/{_locale}/auth/redirect',
+        name: 'app.auth.redirect-to-iam',
+        requirements: ['_locale' => '%app.supported_locale%']
+    )]
     public function __invoke(): Response
     {
         $url = $this->accountManagerUrlProvider->getAccountManagerUrl();

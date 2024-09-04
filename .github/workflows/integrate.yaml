@@ -27,6 +27,7 @@ jobs:
       - { name: "Run composer packages audit", run: "docker compose exec -T app composer audit" }
       - { name: "Lint Symfony service container", run: "docker compose exec -T app bin/console lint:container" }
       - { name: "Lint YAML config files", run: "docker compose exec -T app bin/console lint:yaml config" }
+      - { name: "Lint YAML translation files", run: "docker compose exec -T app bin/console lint:yaml translations" }
       - { name: "Lint Doctrine schema", run: "docker compose exec -T app bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction" }
       - { name: "Lint PHP source code", run: "docker compose exec -T app vendor/bin/php-cs-fixer fix --dry-run --using-cache no --allow-risky=yes" }
       - { name: "Run code static analysis", run: "docker compose exec -T app vendor/bin/phpstan analyse" }

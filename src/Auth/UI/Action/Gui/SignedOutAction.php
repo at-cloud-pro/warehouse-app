@@ -10,7 +10,11 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class SignedOutAction extends AbstractController
 {
-    #[Route(path: '/auth/signed-out', name: 'app.auth.signed-out')]
+    #[Route(
+        path: '/{_locale}/auth/signed-out',
+        name: 'app.auth.signed-out',
+        requirements: ['_locale' => '%app.supported_locale%']
+    )]
     public function __invoke(): Response
     {
         if (null !== $this->getUser()) {

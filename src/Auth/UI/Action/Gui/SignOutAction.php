@@ -9,7 +9,11 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class SignOutAction extends AbstractController
 {
-    #[Route(path: '/auth/sign-out', name: 'app.auth.sign-out')]
+    #[Route(
+        path: '/{_locale}/auth/sign-out',
+        name: 'app.auth.sign-out',
+        requirements: ['_locale' => '%app.supported_locale%']
+    )]
     public function __invoke(): never
     {
         throw new \RuntimeException('This method will never be called.');
