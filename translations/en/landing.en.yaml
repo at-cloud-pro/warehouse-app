@@ -1,0 +1,6 @@
+landing:
+  signed_out:
+    page_title: "You are signed out | AT Cloud Warehouse"
+    header: "You are signed out"
+    text: "You can now safely switch to other page or sign in again with different account."
+    sign_in_again_button: "Sign in again"

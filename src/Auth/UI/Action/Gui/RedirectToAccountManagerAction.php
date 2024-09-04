@@ -9,11 +9,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-final class RedirectToSsoAction extends AbstractController
+final class RedirectToAccountManagerAction extends AbstractController
 {
     public function __construct(private readonly AccountManagerUrlProviderInterface $accountManagerUrlProvider) {}
 
-    #[Route(path: '/auth/redirect', name: 'app.redirect-to-auth')]
+    #[Route(path: '/auth/redirect', name: 'app.auth.redirect-to-iam')]
     public function __invoke(): Response
     {
         $url = $this->accountManagerUrlProvider->getAccountManagerUrl();

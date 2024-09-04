@@ -1,0 +1,35 @@
+/* Bootstrap Button */
+.btn-primary {
+    background-color: #40bf7e;
+    border-color: #40bf7e;
+}
+.btn-primary:hover {
+    background-color: #339864;
+    border-color: #339864;
+}
+.btn-check:checked+.btn-primary, .btn-primary.active, .btn-primary.show, .btn-primary:first-child:active, :not(.btn-check)+.btn-primary:active {
+    background-color: #26724b;
+    border-color: #26724b;
+}
+[data-bs-theme="dark"] .btn-primary {
+    background-color: #26734c;
+    border-color: #26734c;
+}
+[data-bs-theme="dark"] .btn-primary:hover {
+    background-color: #20603f;
+    border-color: #20603f;
+}
+[data-bs-theme="dark"] .btn-check:checked+.btn-primary, .btn-primary.active, .btn-primary.show, .btn-primary:first-child:active, :not(.btn-check)+.btn-primary:active {
+    background-color: #1a4c32;
+    border-color: #1a4c32;
+}
+
+
+[data-bs-theme="dark"] .btn-light {
+    background-color: var(--bs-tertiary-bg);
+    color: var(--bs-tertiary);
+}
+
+[data-bs-theme="dark"] .btn-light:hover, .btn-light:focus {
+    background-color: var(--bs-secondary-bg);
+}

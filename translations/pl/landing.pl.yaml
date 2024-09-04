@@ -1,0 +1,6 @@
+landing:
+  signed_out:
+    page_title: "Wylogowałeś się | AT Cloud Warehouse"
+    header: "Wylogowałeś się"
+    text: "Możesz teraz bezpiecznie przejść na inną stronę lub zalogować się ponownie z innym kontem."
+    sign_in_again_button: "Zaloguj się ponownie"

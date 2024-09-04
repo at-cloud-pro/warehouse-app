@@ -18,7 +18,7 @@ final class CatchSsoTokenAction extends AbstractCommandBusAwareAction
         $token = $request->query->get('token');
 
         if (!is_string($token)) {
-            return $this->redirectToRoute('app.redirect-to-auth');
+            return $this->redirectToRoute('app.auth.redirect-to-iam');
         }
 
         $command = new SignInUserCommand($token);

@@ -10,11 +10,12 @@ security:
       lazy: true
       provider: account_manager
       form_login:
-        login_path: app.redirect-to-auth
+        login_path: app.auth.redirect-to-iam
       logout:
-        path: /auth/sign-out
-        target: /out
+        path: app.auth.sign-out
+        target: app.auth.signed-out
   access_control:
     - { path: ^/auth/redirect, roles: PUBLIC_ACCESS }
     - { path: ^/auth/catch, roles: PUBLIC_ACCESS }
+    - { path: ^/auth/signed-out, roles: PUBLIC_ACCESS }
     - { path: ^/, roles: ROLE_USER }

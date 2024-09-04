@@ -1,0 +1,25 @@
+{% extends 'pages/fullscreen.template.html.twig' %}
+{% trans_default_domain 'landing' %}
+
+{% block title %}{{ 'landing.signed_out.page_title'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="m-3">
+        <div class="">
+            <header class="my-4 d-flex align-items-center justify-content-center">
+                <img src="{{ asset('image/at_cloud_logo.svg') }}" alt="Logo" width="45" height="36" class="d-inline-block align-text-top">
+                <span class="text-secondary ms-1 fs-3">Warehouse</span>
+            </header>
+            <section class="shadow rounded-3 bg-body p-4 mx-auto" style="max-width: 450px">
+                <h1 class="text-secondary fs-2 fw-bold mb-4 text-center">{{ 'landing.signed_out.header'|trans }}</h1>
+                <p class="text-justify text-body-secondary mb-4">{{ 'landing.signed_out.text'|trans }}</p>
+                <div class="d-flex justify-content-end">
+                    <a class="btn btn-light border ml-auto" href="{{ url('app.dashboard') }}">
+                        {{ 'landing.signed_out.sign_in_again_button'|trans }}
+                        <i class="ms-1 fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </div>
+{% endblock %}
