@@ -11,7 +11,8 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route(
     path: '/{_locale}',
     name: 'app.dashboard',
-    requirements: ['_locale' => '%app.supported_locale%']
+    requirements: ['_locale' => '%app.supported_locale%'],
+    defaults: ['_locale' => '%app.default_locale%']
 )]
 final class ShowDashboardAction extends AbstractController
 {

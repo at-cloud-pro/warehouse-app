@@ -3,6 +3,7 @@ parameters:
   account_manager.service_id: '%env(AT_CLOUD_IAM_SERVICE_ID)%'
   account_manager.service_name: '%env(AT_CLOUD_IAM_SERVICE_NAME)%'
   app.supported_locale: 'en|pl'
+  app.default_locale: 'en'
 
 services:
   _defaults:
