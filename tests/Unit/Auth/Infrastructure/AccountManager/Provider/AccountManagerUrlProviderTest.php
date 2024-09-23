@@ -13,7 +13,9 @@ final class AccountManagerUrlProviderTest extends TestCase
     public function testCorrectUrlCreation(): void
     {
         $configurationFake = new AccountManagerConfiguration(
-            'https://example.com', 'service-id', 'service-name'
+            'https://example.com',
+            'service-id',
+            'service-name'
         );
 
         $provider = new AccountManagerUrlProvider($configurationFake);
