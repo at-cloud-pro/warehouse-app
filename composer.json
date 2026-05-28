@@ -21,7 +21,7 @@
         "symfony/runtime": "7.1.*",
         "symfony/translation": "7.1.*",
         "symfony/twig-bundle": "7.1.*",
-        "symfony/yaml": "7.1.*"
+        "symfony/yaml": "7.4.*"
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^8.0",
